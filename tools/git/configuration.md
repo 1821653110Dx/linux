@@ -1,0 +1,2 @@
+# show
+	git config --list

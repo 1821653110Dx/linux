@@ -1,0 +1,1 @@
+	if * appears behind the local branch name, that means workspace/cache have changed, use 'git status' to see the changes 
