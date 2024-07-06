@@ -372,7 +372,7 @@ alias activate="source ~/tool/python/venv/bin/activate"
 alias bat0="upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage"
 alias freeram="echo 1 >/proc/sys/vm/drop_caches"
 alias Rsync="rsync -aPv"
-alias rsync_del="rsync --delete-before -av"
+alias rsync_del="rsync --delete-before -av ~/trash/"
 alias Aria2c="aria2c -s 16 -x 16 -j 16"
 ```
 
