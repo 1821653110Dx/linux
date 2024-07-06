@@ -282,10 +282,6 @@
     换源
         sudo flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
 
-## gui软件包
-
-    wps krita blender librecad freecad virtualbox joplin yesplaymusic
-
 # cpu配置
 
 ## 设置默认governor
@@ -363,7 +359,6 @@ devices/system/cpu/cpu15/cpufreq/scaling_governor = schedutil
 ```
 # 对于bash，直接复制到/etc/bash.bashrc
 # xalias
-alias joplin="/home/freather-ben/app"
 alias blender="/home/freather-ben/app/blender/blender"
 alias freecad="/home/freather-ben/app/FreeCAD.AppImage"
 
@@ -623,6 +618,37 @@ shopt -s extglob
             sudo apt-fast install libtiff5
             删除该镜像源
 
+## obsidian
+
+- #### 设置
+    
+    - 关于
+        - disable 自动更新
+    - 编辑器
+        - disable 拼写检查
+    - 文件与链接
+        - 删除文件设置 = 移至软件回收站
+        - 新建笔记的存放位置 = 指定的附件文件夹
+        - 附件默认存放路径=指定的附件文件夹
+            - 附件文件夹路径 = _resources
+    - 外观
+        - 字体-字体大小
+        - CSS代码片段
+    - 快捷键
+        - C F1..6
+    - 核心插件
+        - 打开
+            - 工作区
+            - 斜杠命令
+        - 关闭
+            - 文件恢复
+            - 日记
+    - 白板
+        - 新建画布文件的默认位置 = 指定的附录文件夹
+- #### 族谱
+    - 筛选
+        - 关闭孤立文件
+- #### 额外插件
 ## timeshift
 
 - 位置
@@ -691,9 +717,6 @@ shopt -s extglob
         
         在当前用户目录下创建app/icons，把所有非deb应用移动到app
     
-    joplin
-      外观-主题 = 暗黑
-      同步-同步目标 = onedrive，点击“打开同步向导”
     
     blender
       interface
