@@ -621,17 +621,19 @@ shopt -s extglob
 ## obsidian
 
 - #### 设置
-    
     - 关于
         - disable 自动更新
     - 编辑器
-        - disable 拼写检查
+	    - 新标签页的默认视图 = 阅读模式（new）
+	    - disable 显示缩进参考线（new）
+	    - disable 拼写检查
     - 文件与链接
         - 删除文件设置 = 移至软件回收站
         - 附件默认存放路径=指定的附件文件夹
-            - 附件文件夹路径 = _resources
+        - 附件文件夹路径 = _resources
     - 外观
         - 字体-字体大小
+        - 高级-缩放比例
         - CSS代码片段
     - 快捷键
         - C F1..6
@@ -649,7 +651,13 @@ shopt -s extglob
 - #### 族谱
     - 筛选
         - 关闭孤立文件
-- #### 额外插件
+- #### 额外插件(new)
+	- image toolkit
+		- 快捷键设置-为触发弹出查看图片设置快捷键=CTRL
+	- quick latex
+	- mousewheel image zoom
+	- workbooks
+	- docxer
 ## timeshift
 
 - 位置
