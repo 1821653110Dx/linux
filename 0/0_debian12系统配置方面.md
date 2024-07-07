@@ -656,7 +656,6 @@ shopt -s extglob
 		- 快捷键设置-为触发弹出查看图片设置快捷键=CTRL
 	- quick latex
 	- mousewheel image zoom
-	- workbooks
 	- docxer
 ## timeshift
 
