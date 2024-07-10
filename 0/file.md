@@ -7,6 +7,14 @@ rename -v 's/abc/ABC/' *
 - -n non-action
 - -v print the result if successed
 
+# list
+	tree [选项] [目录 ]
+	-a 显示所有文件，包括隐藏文件
+	-d 只显示目录
+	-f 显示每个文件的绝对路径
+	-i 不显示树枝，常与 -f 参数配合使用
+	-L level 遍历目录的最大层数，level为大于0的正整数
+	-h 大小
 # cp files
 	if dir many
 		rsync -aPv [Source Dir] [Target Dir] (--delete)
@@ -17,7 +25,8 @@ rename -v 's/abc/ABC/' *
 		# --append-verify: continue to transfer file from the last interruption-point and check the integrity完整性 of the file
 	if dir less
 		cd [Source Dir]; tar cf - . | (cd [Target Dir]; tar xvf -)
-		
+# synchronization
+rsync -rtvu --delete source_folder/ destination_folder/
 # remove files
 ## bash
     rm -r !(a)

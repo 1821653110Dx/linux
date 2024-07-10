@@ -56,7 +56,7 @@
     复制缺失的字体到当前目录
     fc-cache -fv
 
-# 设置“设置管理器”
+# 配置“设置管理器”
 
 ## 窗口管理器   
 	标题字体：
@@ -114,6 +114,7 @@
     辅助功能：
         用来获取和移动窗口的按键： super
         最大化窗口时隐藏标题： 打勾
+    工作区
         关闭：在桌面上使用鼠标滚轮切换工作区
     合成器：
         关闭：
@@ -203,13 +204,10 @@
     debian版本切换为当前版本，开启“使用非自由软件源”，复制软件源
     复制一份"/etc/apt/sources.list"，把复制的内容覆盖到原文件中，保存并关闭
     sudo apt update
-
-# 软件包处理
-
-## 安装pigchax
+# pigchax
 
 [pigchax](http://120.232.240.71:8888/?platform=linux_x86_64&cur_version=1693818944&deviceinfo=freather-ben%7CDebian%20GNU%2FLinux%2012%20%28bookworm%29&deviceid=3805ab00fcb444f5921c00cdd1110158)
-
+# 软件包处理
 ## apt-fast
 
         sudo apt-get install aptitude wget
@@ -233,11 +231,11 @@
     sudo apt-fast update ;sudo apt-fast dist-upgrade -y ; sudo apt-get autoremove -y
     重启
 
-## 执行以下命令
+## 基本包安装
 
-    sudo apt-fast install tmux git dos2unix tree tlp zsh growisofs xorriso wodim ffmpeg htop cpufrequtils sysfsutils git python3-pip pipx texlive-full cjk-latex latex-cjk-chinese fcitx5 fcitx5-chinese-addons xclip p7zip-rar timeshift blueman  neovim flatpak pandoc okular pandoc -y
+    sudo apt-fast install tmux git dos2unix tree tlp zsh growisofs xorriso wodim ffmpeg htop cpufrequtils sysfsutils git python3-pip pipx texlive-full cjk-latex latex-cjk-chinese fcitx5 fcitx5-chinese-addons xclip p7zip-rar timeshift blueman neovim flatpak pandoc -y
         sh -c "$(wget https://gitee.com/gloriaied/oh-my-zsh/raw/master/tools/install.sh -O -)"
-
+> 虚拟机不用安装 cpufrequtils
 ## git
 
     配置git
@@ -280,7 +278,8 @@
 ## flatpak
 
     换源
-        sudo flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
+        sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+		sudo flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
 
 # cpu配置
 
@@ -374,6 +373,7 @@ alias freeram="echo 1 >/proc/sys/vm/drop_caches"
 alias Rsync="rsync -aPv"
 alias rsync_del="rsync --delete-before -av ~/trash/"
 alias Aria2c="aria2c -s 16 -x 16 -j 16"
+alias rsync_u="rsync -rtvu --delete"
 ```
 
 # 常用环境变量
@@ -393,11 +393,11 @@ desktop=/home/freather-ben/桌面
 export PATH="$PATH:/usr/sbin/"
 export PATH="$PATH:/usr/local/sbin/"
 
-# 开启extglob
+# 开启extglob(zsh不用这个)
 shopt -s extglob
 ```
 
-# 应用的配置
+# 配置其余应用
 
 ## nano
 
@@ -633,6 +633,7 @@ shopt -s extglob
         - 附件文件夹路径 = _resources
     - 外观
         - 字体-字体大小
+        - 界面-显示页内标题 disable+
         - 高级-缩放比例
         - CSS代码片段
     - 快捷键
@@ -657,6 +658,11 @@ shopt -s extglob
 	- quick latex
 	- mousewheel image zoom
 	- docxer
+## minder
+	appearance
+		关闭enable animations
+		打开Text field font size
+		创建一个基于dark的光标为黑的主题，default theme = Dark
 ## timeshift
 
 - 位置
@@ -666,7 +672,7 @@ shopt -s extglob
   - 用户
     - 选择Include all
       
-      ## mousepad
+## mousepad
 
 - 编辑首选项
   
@@ -687,28 +693,22 @@ shopt -s extglob
     - 智能键
       - Home/End : 设置为总是
         
-        ## thunar
+## thunar
         
         按C 2
         文件管理器首选项-行为-交互菜单
-        enable 显示永久删除...
-        
-        ## librecad
+	        enable 显示永久删除...
+## librecad
         
         options-widget_options
         enable style, choose Adwaita-dark
         
-        ## freecad
+## freecad
         
         Edit-Preferences-general
         style-sheet = Dark-modern-blue
         
-        ## gimp
-        
-        首选项-主题，打开当前主题目录下的gtkrc
-        修改font_name的11为12
-        
-        ## texstudio
+## texstudio
         
         Options-configure_texstudio
         enable "show Advanced Options"
@@ -721,47 +721,56 @@ shopt -s extglob
         disable "Try to automatically choose best dispaly options"
         enable "Disable fixed pitch mode"
         
-        ## 非deb应用
+
+## 非deb应用
         
-        在当前用户目录下创建app/icons，把所有非deb应用移动到app
+当前用户目录下创建app/icons，把所有非deb应用移动到app
+### gimp
+flatpak 安装
+下载并解压补丁[PhotoGIMP](https://github.com/Diolinux/PhotoGIMP)
+把photoGIMP-master 中的.var复制到用户目录中
+nvim /home/freather-ben/.var/app/org.gimp.GIMP/config/GIMP/2.10/gtkrc , 取消注释并修改font_name=12
+### blender
+  interface
+
+	  resolution
+	  tooltips-python_tooltops
+	  text rendering
+		  turn off "anti-aliasing"
+
+  viewport
+
+	  quality
+		  viewport anti-aliasing = no anti-aliasing
+		  smooth wires = all turn off
+
+  navigation
+
+	  orbit&pan
+		  orbit method = trackball
+
+  keymap
+
+	  pan view = C mouse3
+	  zoom = S mouse3
+
+把所有的icon移动到icons,获取方法
+
+	/tmp/.xxx/usr/share/application
+	把每个的*.desptop复制到/usr/share/applications,并修改Exec,Icon
     
+# 蜂鸣器卸载
+创建/home/freather-ben/tool/auto.sh
+```bash
+#!/usr/bin/bash
+sudo rmmod pcspkr ;
+```
+sudo crontab -e, 添加@reboot /home/freather-ben/tool/auto.sh
+
+
+# n卡驱动安装
     
-    blender
-      interface
-    
-          resolution
-          tooltips-python_tooltops
-          text rendering
-              turn off "anti-aliasing"
-    
-      viewport
-    
-          quality
-              viewport anti-aliasing = no anti-aliasing
-              smooth wires = all turn off
-    
-      navigation
-    
-          orbit&pan
-              orbit method = trackball
-    
-      keymap
-    
-          pan view = C mouse3
-          zoom = S mouse3
-    
-    把所有的icon移动到icons,获取方法
-      /tmp/.xxx/usr/share/application
-    把每个的*.desptop复制到/usr/share/applications,并修改Exec,Icon
-    
-    # 新利得软件管理器
-    
-    设置-首选项
-      常规信息-系统升级 = 总是询问
-    
-    # n卡驱动安装
-    
-    一、安装必须的工具
+一、安装必须的工具
 
 ```bash
 sudo apt install dkms build-essential gcc make linux-headers-$(uname -r)
@@ -861,22 +870,8 @@ sudo apt update
 sudo apt install lib32ncurses5 lib32z1 lib32bz2-1.0
 ```
 
-# else
 
-    设置
-        显示
-            点击"主显示器右边"的灯泡
-                输出：主要的
-    处理开机亮度最大
-        vim ~/tool/brightness.sh，内容如下
-            #!/usr/bin
-            echo 75 > /sys/class/backlight/nvidia_0/brightness
-        sudo chmod +x ~/tool/brightness.sh
-        sudo crontab -e,添加如下内容    # sudo crontab -e 是以root权限自动执行脚本
-            @reboot /home/freather-ben/tool/brightness.sh
----
----
-#  如果缺失的模块没有在安装完系统后仍然缺失
+# 系统安装完后安装缺失固件
 ## 方法1
     把固件文件放到/lib/firmware/中
         没有这个目录，先apt-get install firmware-*,如果目录仍然没有,自己手动建一个
@@ -890,3 +885,16 @@ sudo apt install lib32ncurses5 lib32z1 lib32bz2-1.0
     # 重新载入模块
     modprobe -r iwlwifi
     modprobe  iwlwifi
+# else
+
+    设置
+        显示
+            点击"主显示器右边"的灯泡
+                输出：主要的
+    处理开机亮度最大
+        vim ~/tool/brightness.sh，内容如下
+            #!/usr/bin
+            echo 75 > /sys/class/backlight/nvidia_0/brightness
+        sudo chmod +x ~/tool/brightness.sh
+        sudo crontab -e,添加如下内容    # sudo crontab -e 是以root权限自动执行脚本
+            @reboot /home/freather-ben/tool/brightness.sh
